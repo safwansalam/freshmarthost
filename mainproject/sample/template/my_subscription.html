@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>My Subscription</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .card {
+            border-radius: 12px;
+        }
+        .status-active { color: green; font-weight: 600; }
+        .status-paused { color: orange; font-weight: 600; }
+        .status-cancelled { color: red; font-weight: 600; }
+        /* NAVBAR */
+.navbar-nav .nav-link{
+    color:#222;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+.navbar-nav .nav-link:hover{
+    color:#28a745;
+}
+    </style>
+</head>
+
+<body>
+<!-- ✅ NAVBAR START -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-2">
+<div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="/user_home">
+        <img src="{% static 'images/freshmartlogo1.png' %}" height="55">
+    </a>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+        <ul class="navbar-nav gap-lg-4 text-uppercase">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user_home">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user_products">Product</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link " href="/subscriptionplan">Subscription Plan</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/view_cart/">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_wishlist">Wishlist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="my_subscription">My Subscription</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="my_orders">My Order</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Icons -->
+    <div class="d-flex gap-3">
+        <a href="/profile" class="nav-link fs-5"><i class="bi bi-person-circle"></i></a>
+        <a href="/logout" class="nav-link fs-5"><i class="bi bi-power"></i></a>
+    </div>
+
+</div>
+</nav>
+<!-- ✅ NAVBAR END -->
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">My Subscriptions</h2>
+
+    {% if subscriptions %}
+    <div class="card shadow">
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-success">
+                    <tr>
+                        <th>Product</th>
+                        <th>Plan</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Next Delivery</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for sub in subscriptions %}
+                    <tr>
+                        <td>{{ sub.product.name }}</td>
+                        <td>{{ sub.plan.plan_name }} ({{ sub.plan.plan_type }})</td>
+                        <td>{{ sub.quantity }}</td>
+                        <td>₹ {{ sub.total_price }}</td>
+                        <td>{{ sub.start_date }}</td>
+                        <td>{{ sub.end_date }}</td>
+                        <td>{{ sub.next_delivery }}</td>
+
+                        <td>
+                            {% if sub.status == "active" %}
+                                <span class="status-active">Active</span>
+                            {% elif sub.status == "paused" %}
+                                <span class="status-paused">Paused</span>
+                            {% else %}
+                                <span class="status-cancelled">{{ sub.status }}</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sub.payment_status == "paid" %}
+                                <span class="badge bg-success">Paid</span>
+                            {% elif sub.payment_status == "pending" %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% else %}
+                                <span class="badge bg-danger">Failed</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    {% else %}
+        <div class="alert alert-info text-center">
+            You have no active subscriptions.
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/user_home" class="btn btn-success">Back to Home</a>
+    </div>
+
+</div>
+
+</body>
+</html>

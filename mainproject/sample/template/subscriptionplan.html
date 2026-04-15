@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<title>Fresh Mart - Subscription Plans</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+/* NAVBAR */
+.navbar-nav .nav-link{
+    color:#222;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+.navbar-nav .nav-link:hover{
+    color:#28a745;
+}
+
+/* PLAN SECTION */
+.plan-section{
+    margin-top:50px;
+}
+
+.plan-card{
+    border:1px solid #e3e3e3;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    transition:.3s;
+    background:#fff;
+}
+
+.plan-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,.1);
+}
+
+.plan-title{
+    font-weight:700;
+    font-size:22px;
+}
+
+.plan-type{
+    color:#28a745;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.plan-price{
+    font-size:28px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.feature{
+    text-align:left;
+    font-size:14px;
+    margin:6px 0;
+}
+
+.subscribe-btn{
+    margin-top:15px;
+    width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ NAVBAR START -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-2">
+<div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="/user_home">
+        <img src="{% static 'images/freshmartlogo1.png' %}" height="55">
+    </a>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+        <ul class="navbar-nav gap-lg-4 text-uppercase">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user_home">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user_products">Product</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active text-success" href="/subscriptionplan">Subscription Plan</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/view_cart/">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_wishlist">Wishlist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Subscription</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="my_orders">My Order</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Icons -->
+    <div class="d-flex gap-3">
+        <a href="/profile" class="nav-link fs-5"><i class="bi bi-person-circle"></i></a>
+        <a href="/logout" class="nav-link fs-5"><i class="bi bi-power"></i></a>
+    </div>
+
+</div>
+</nav>
+<!-- ✅ NAVBAR END -->
+
+
+<div class="container">
+
+<h2 class="text-center mt-4">Choose Your Grocery Subscription</h2>
+<p class="text-center text-muted">Fresh groceries delivered automatically to your home</p>
+
+
+<!-- ✅ DAILY -->
+<div class="plan-section">
+<h4 class="mb-3">Daily Delivery Plans</h4>
+<div class="row">
+
+{% for j in plans %}
+{% if j.plan_type == 'daily' %}
+<div class="col-md-4">
+    <div class="plan-card">
+
+        <div class="plan-title">{{ j.plan_name }}</div>
+        <div class="plan-type">Daily Delivery</div>
+            <div class="plan-price text-success">
+    Billed Daily Based on Product Price
+            </div>
+
+<!--        <div class="plan-price">₹{{ j.price }}</div>-->
+
+        <div class="feature">✔ Fresh vegetables every morning</div>
+        <div class="feature">✔ Milk & essentials</div>
+        <div class="feature">✔ Hassle-free daily supply</div>
+
+        <a href="user_products" class="btn btn-success subscribe-btn">
+            Choose Product
+        </a>
+
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+</div>
+</div>
+
+
+<!-- ✅ WEEKLY -->
+<div class="plan-section">
+<h4 class="mb-3">Weekly Delivery Plans</h4>
+<div class="row">
+
+{% for j in plans %}
+{% if j.plan_type == 'weekly' %}
+<div class="col-md-4">
+    <div class="plan-card">
+
+        <div class="plan-title">{{ j.plan_name }}</div>
+        <div class="plan-type">Weekly Delivery</div>
+            <div class="plan-price text-success">
+    Product Price × 7 Days
+            </div>
+
+<!--        <div class="plan-price">₹{{ j.price }}</div>-->
+
+        <div class="feature">✔ Full week groceries</div>
+        <div class="feature">✔ Fruits + vegetables combo</div>
+        <div class="feature">✔ Time saving</div>
+
+        <a href="user_products" class="btn btn-success subscribe-btn">
+            Choose Product
+        </a>
+
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+</div>
+</div>
+
+
+<!-- ✅ MONTHLY -->
+<div class="plan-section mb-5">
+<h4 class="mb-3">Monthly Delivery Plans</h4>
+<div class="row">
+
+{% for j in plans %}
+{% if j.plan_type == 'monthly' %}
+<div class="col-md-4">
+    <div class="plan-card">
+
+        <div class="plan-title">{{ j.plan_name }}</div>
+        <div class="plan-type">Monthly Delivery</div>
+            <div class="plan-price text-success">
+    Product Price × 30 Days
+            </div>
+
+<!--        <div class="plan-price">₹{{ j.price }}</div>-->
+
+        <div class="feature">✔ Complete monthly ration</div>
+        <div class="feature">✔ Rice, atta, oil & essentials</div>
+        <div class="feature">✔ Budget friendly</div>
+
+        <a href="user_products" class="btn btn-success subscribe-btn">
+            Choose Product
+        </a>
+
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+</div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

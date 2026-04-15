@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="text-center mb-4">My Profile</h3>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Mobile</th>
+                <td>{{ user.mobile }}</td>
+            </tr>
+            <tr>
+                <th>Total Orders</th>
+                <td>{{ total_orders }}</td>
+            </tr>
+            <tr>
+                <th>Active Subscriptions</th>
+                <td>{{ active_subscriptions }}</td>
+            </tr>
+        </table>
+
+        <a href="user_home" class="btn btn-secondary">
+            Back
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
