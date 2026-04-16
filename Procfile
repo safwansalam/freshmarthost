@@ -1,1 +1,1 @@
-web: cd mainproject/sample && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn sample.wsgi --log-file -
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn sample.wsgi --log-file -
