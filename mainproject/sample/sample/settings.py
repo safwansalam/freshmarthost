@@ -37,6 +37,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-a2015.up.railway.app']
 
 
 # Application definition
@@ -64,10 +65,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://yourapp.railway.app']
-ALLOWED_HOSTS = ['yourapp.railway.app']
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+
 
 ROOT_URLCONF = 'sample.urls'
 
