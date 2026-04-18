@@ -12,7 +12,7 @@ env/
 
 # Django
 *.sqlite3
-media/
+
 
 
 # Environment variables
