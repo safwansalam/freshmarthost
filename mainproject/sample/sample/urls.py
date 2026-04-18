@@ -62,5 +62,5 @@ urlpatterns = [
     path('update_profile', views.update_profile),
     path('update_quantity/<int:cart_id>/<str:action>/', views.update_quantity),
 ]
-if settings.DEBUG:
-    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
