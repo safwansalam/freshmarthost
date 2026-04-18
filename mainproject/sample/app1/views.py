@@ -17,7 +17,8 @@ def register(request):
         role = request.POST['role']  # ⭐ NEW FIELD
 
         if user_register.objects.filter(username=a).exists():
-            return messages.success("username already exists")
+            messages.success(request, "username already exists")
+            return redirect(register)
         else:
             if d == e:
                 user_register.objects.create(
